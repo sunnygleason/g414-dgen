@@ -32,15 +32,21 @@ import com.g414.hash.LongHash;
 public class EntityGenerator {
     protected final LongHash hash;
     protected final List<Field<?>> fields;
+    protected final long seed;
 
     public EntityGenerator(LongHash hash, List<Field<?>> fields) {
+        this(hash, fields, 0L);
+    }
+
+    public EntityGenerator(LongHash hash, List<Field<?>> fields, long seed) {
         this.hash = hash;
         this.fields = fields;
+        this.seed = seed;
     }
 
     public Map<String, Object> getEntity(String id) {
-        long seed = hash.getLongHashCode(id);
-        Random random = new Random(seed);
+        long entitySeed = hash.getLongHashCode(id) ^ this.seed;
+        Random random = new Random(entitySeed);
 
         Map<String, Object> entity = new LinkedHashMap<String, Object>();
         for (Field<?> field : this.fields) {
