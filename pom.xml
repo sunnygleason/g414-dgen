@@ -10,7 +10,7 @@
     <dependency>
       <groupId>com.g414.hash</groupId>
       <artifactId>g414-hash</artifactId>
-      <version>0.5.0</version>
+      <version>0.6.0</version>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
