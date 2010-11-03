@@ -43,16 +43,16 @@ public class Fields {
     }
 
     /** Always returns the constant provided */
-    public static Field<Object> getConstantField(final String name,
-            final Object value) {
-        return new Field<Object>() {
+    public static <T> Field<T> getConstantField(final String name,
+            final T value) {
+        return new Field<T>() {
             @Override
             public String getName() {
                 return name;
             }
 
             @Override
-            public Object getValue(String entityId,
+            public T getValue(String entityId,
                     Map<String, Object> entitySoFar, Random random) {
                 return value;
             }
@@ -90,6 +90,27 @@ public class Fields {
             public Integer getValue(String entityId,
                     Map<String, Object> entitySoFar, Random random) {
                 int next = random.nextInt(range);
+
+                return next + start;
+            }
+        };
+    }
+    
+    /** returns a random long in the given range */
+    public static Field<Long> getLongField(final String name,
+            final long start, final long stop) {
+        return new Field<Long>() {
+            private final long range = stop - start;
+
+            @Override
+            public String getName() {
+                return name;
+            }
+
+            @Override
+            public Long getValue(String entityId,
+                    Map<String, Object> entitySoFar, Random random) {
+                long next = Math.abs(random.nextLong() % range);
 
                 return next + start;
             }
