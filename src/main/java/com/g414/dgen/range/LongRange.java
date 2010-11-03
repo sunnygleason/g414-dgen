@@ -72,8 +72,8 @@ public class LongRange implements Range<Long> {
     @Override
     public Iterator<Long> iterator() {
         return new Iterator<Long>() {
-            protected volatile BigInteger current = p2.mod(span);
-            protected volatile long limit = span.longValue();
+            protected final long limit = span.longValue();
+            protected BigInteger current = p2.mod(span);
             protected volatile long count = 0;
 
             @Override
@@ -82,7 +82,11 @@ public class LongRange implements Range<Long> {
             }
 
             @Override
-            public Long next() {
+            public synchronized Long next() {
+                if (!hasNext()) {
+                    throw new IllegalStateException("LongRange iterator has no next()");
+                }
+                
                 BigInteger curSnap = current;
 
                 for (long i = 0; i < step; i++) {
