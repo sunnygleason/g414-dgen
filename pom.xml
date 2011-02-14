@@ -6,11 +6,19 @@
   <artifactId>g414-dgen</artifactId>
   <version>0.1.0</version>
 
+  <repositories>
+    <repository>
+      <id>g414 Repository</id>
+      <url>http://mvn.g414.com/</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.g414.hash</groupId>
       <artifactId>g414-hash</artifactId>
-      <version>0.6.0</version>
+      <version>0.7.0</version>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
